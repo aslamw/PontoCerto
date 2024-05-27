@@ -1,0 +1,35 @@
+{
+  "development": {
+    "port": 3000,
+    "database": {
+      "username": "root",
+      "password": null,
+      "database": "database_development",
+      "host": "127.0.0.1",
+      "dialect": "sqlite",
+      "storage": "./development.sqlite"
+    }
+  },
+  "test": {
+    "port": 3001,
+    "database": {
+      "username": "root",
+      "password": null,
+      "database": "database_test",
+      "host": "127.0.0.1",
+      "dialect": "sqlite",
+      "storage": ":memory:"
+    }
+  },
+  "production": {
+    "port": 3000,
+    "database": {
+      "username": "root",
+      "password": "root",
+      "database": "ponto_certo",
+      "host": "127.0.0.1",
+      "dialect": "mysql",
+      "storage": null
+    }
+  }
+}

@@ -1,0 +1,18 @@
+
+main{
+    display: flex;
+    flex-direction: column;
+
+    width: 300px;
+    margin-top: 0;
+}
+
+.box-inf{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#time{
+    font-size: 50%;
+    margin-right: 20px;
+}
