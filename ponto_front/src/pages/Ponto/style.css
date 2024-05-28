@@ -1,18 +1,62 @@
 
-main{
+.box-ponto{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     width: 300px;
-    margin-top: 0;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 
 .box-inf{
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    width: 100%;
 }
 #time{
+    font-size: 40%;
+    
+}
+#title-time{
+    margin-bottom: 20px;
+}
+#time-now{
+    font-size: 150%;
+}
+
+#user{
     font-size: 50%;
-    margin-right: 20px;
+    text-align: right;
+
+    margin-bottom: 10%;
+}
+
+button{
+    margin: 20px;
+    background-color: var(--light-orange);
+    border: none;
+
+    border-radius: 2px;
+    width: 70%;
+    height: 30px;
+
+    font-size: 60%;
+    font-weight: 600;
+
+}
+button:active{
+    background-color: var(--dark-orange);
+}
+
+.box-date{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.box-date p{
+    font-size: 60%;
 }
