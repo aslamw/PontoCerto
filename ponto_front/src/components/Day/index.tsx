@@ -21,9 +21,17 @@ export const PontoDay: React.FC = () => {
 
         
         console.log(response.data)
-        setData(response.data)
+        // eslint-disable-next-line array-callback-return
+        const data_filter = response.data.map((items: any , index: any)=>{
+            let base = items.timestamp.split(" ")
+            base[1] = base[1].split(":")
+            return [base[0],`${base[1][0]}h ${base[1][1]}m`]
+        })
+        console.log(data_filter)
+        setData(data_filter)
       } catch (error) {
         console.error('Erro ao buscar dados:', error);
+        setData([])
       }
     };
 
@@ -35,12 +43,12 @@ export const PontoDay: React.FC = () => {
   return (
     <div className='organize-box'>
         
-        {/* {data.map((item:any, index:any) =>(
+        {data.map((item, index) =>(
             <div key={`${index}b`} className='box'>
                 <p key={`${index}d`} id='date'>{item[0]}</p>
                 <p key={`${index}h`} id='hour'><b>{item[1]}</b></p>
             </div>
-        ))}  */}
+        ))}  
         
     </div>
   )

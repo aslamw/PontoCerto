@@ -33,7 +33,7 @@ export const Home: React.FC = () => {
   return (
     <main className='box-user'>
         <p>Ponto <b>Certo</b></p>
-        <input type="text" name="user" id="user" property='Codigo do usuário' onChange={handleInputChange}/>
+        <input type="text" name="user" id="user" placeholder='Codigo do usuário' onChange={handleInputChange}/>
         <button  id='button' onClick={loginUser}>Confirmar</button>
         
     </main>

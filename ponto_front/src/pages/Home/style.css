@@ -29,6 +29,11 @@ input{
     border: none;
 
     border-radius: 2px;
+    padding: 2px;
+    
+}
+#user::placeholder{
+    text-align: left;
 }
 #button{
     width: 100%;
