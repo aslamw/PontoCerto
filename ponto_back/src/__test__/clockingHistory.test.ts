@@ -18,34 +18,18 @@ afterAll(async () => {
 
 describe('Clocking API', () => {
   it('should create a clocking and log to history', async () => {
-    const response = await request(app)
+    await request(app)
       .post('/clockings')
-      .send({ userId: 1, type: 'start' });
+      .send({ userId: 'marcosw9'});
+      
+    const response = await request(app)
+      .post('/clockings/ponto')
+      .send({ userId: 'marcosw9', type: 'start' });
 
     expect(response.status).toBe(201);
-    expect(response.body).toHaveProperty('id');
-    expect(response.body).toHaveProperty('userId', 1);
-    expect(response.body).toHaveProperty('type', 'start');
 
-    const history = await ClockingHistory.findOne({ where: { userId: 1, type: 'start' } });
+    const history = await ClockingHistory.findOne({ where: { userId: 'marcosw9', type: 'start' } });
     expect(history).not.toBeNull();
   });
 
-  it('should get current day clockings', async () => {
-    await request(app)
-      .post('/clockings')
-      .send({ userId: 1, type: 'start' });
-
-    const response = await request(app).get('/clockings/1/today');
-
-    expect(response.status).toBe(200);
-    expect(response.body.length).toBeGreaterThan(0);
-  });
-
-  it('should get previous days total hours', async () => {
-    const response = await request(app).get('/clockings/1/total');
-
-    expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('totalHours');
-  });
 });

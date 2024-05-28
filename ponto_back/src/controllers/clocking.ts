@@ -1,29 +1,35 @@
 import { Request, Response } from 'express';
-import { Op } from 'sequelize';
 import Clocking from '../models/clocking';
 
 class ClockingController {
-  public async getCurrentDayClockings(req: Request, res: Response): Promise<Response> {
+  public async getClockings(req: Request, res: Response): Promise<Response> {
     const userId = req.params.userId;
-    const startOfDay = new Date();
-    startOfDay.setHours(0, 0, 0, 0);
-    const endOfDay = new Date();
-    endOfDay.setHours(23, 59, 59, 999);
 
-    const clockings = await Clocking.findAll({
+    const clocking = await Clocking.findOne({
       where: {
         userId,
-        timestamp: {
-          [Op.between]: [startOfDay, endOfDay],
-        },
+        
       },
     });
+    if (!clocking){
+      return res.status(404).json({'msg':'não encontrado'});
+    }
 
-    return res.json(clockings);
+    return res.json(clocking);
   }
 
   public async createClocking(req: Request, res: Response): Promise<Response> {
     const { userId } = req.body;
+
+    const verify = await Clocking.findOne({
+      where: {
+        userId,
+        
+      },
+    });
+    if (verify){
+      return res.status(400).json({'msg':'usuário já existe'});
+    }
 
     const clocking = await Clocking.create({
       userId
@@ -32,22 +38,15 @@ class ClockingController {
     return res.status(201).json(clocking);
   }
 
-  public async getPreviousDaysTotal(req: Request, res: Response): Promise<Response> {
-    const userId = req.params.userId;
+  public async getAllClockings(req: Request, res: Response): Promise<Response> {
 
-    const clockings = await Clocking.findAll({
-      where: {
-        userId,
-        timestamp: {
-          [Op.lt]: new Date(),
-        },
-      },
-    });
+
+    const clockings = await Clocking.findAll();
 
     // Calculate total hours from clockings
     // (this calculation needs to be implemented based on the specific requirements)
 
-    return res.json({ totalHours: clockings });
+    return res.json({ users: clockings });
   }
 }
 

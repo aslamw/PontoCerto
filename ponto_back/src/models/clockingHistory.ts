@@ -6,7 +6,7 @@ class ClockingHistory extends Model {
   public id!: number;
   public userId!: string;
   public type!: 'start' | 'end';
-  public timestamp!: Date;
+  public timestamp!: string;
 }
 
 ClockingHistory.init(
@@ -31,7 +31,7 @@ ClockingHistory.init(
       allowNull: false,
     },
     timestamp: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

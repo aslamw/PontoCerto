@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { PontoDay } from '../../components';
+import { api, getToken } from '../../utils';
 import "./style.css"
+
 
 export const Ponto: React.FC = () => {
 
     const [time, setTime] = useState('');
+    const user = getToken();
+    
 
     useEffect( () => {
+       
+
         const updateClock = () => {
             const now = new Date();
             const hours = now.getHours();
@@ -29,13 +35,13 @@ export const Ponto: React.FC = () => {
                 <p>Horas de hoje</p>
             </span>
             <span id='user'>
-                <p>#marcosw9</p>
+                <p>#{user}</p>
                 <p>Usuário</p>
                 
             </span>
         </div>
 
-        <button>Hora de entrada</button>
+        <button >Hora de entrada</button>
 
         <div className='box-date'>
             <p>Dias anteriores</p>

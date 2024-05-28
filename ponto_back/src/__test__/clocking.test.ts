@@ -2,6 +2,7 @@ import request from 'supertest';
 import { sequelize } from '../models';
 import app from '../app';
 import { Server } from 'http';
+import Clocking from '../models/clocking';
 
 let server: Server;
 
@@ -19,29 +20,30 @@ describe('Clocking API', () => {
   it('should create a clocking', async () => {
     const response = await request(app)
       .post('/clockings')
-      .send({ userId: 1, type: 'start' });
+      .send({ userId: 'marcosw9'});
+
+    const clocking = await Clocking.findOne({
+      where: {
+        userId: 'marcosw9'
+        
+      }
+    });
 
     expect(response.status).toBe(201);
-    expect(response.body).toHaveProperty('id');
-    expect(response.body).toHaveProperty('userId', 1);
-    expect(response.body).toHaveProperty('type', 'start');
+    expect(clocking?.userId).toBe('marcosw9');
+
   });
 
-  it('should get current day clockings', async () => {
-    await request(app)
-      .post('/clockings')
-      .send({ userId: 1, type: 'start' });
+  it('get all', async () => {
 
-    const response = await request(app).get('/clockings/1/today');
+    const response = await request(app).get('/clockings/total');
 
     expect(response.status).toBe(200);
-    expect(response.body.length).toBeGreaterThan(0);
   });
 
-  it('should get previous days total hours', async () => {
-    const response = await request(app).get('/clockings/1/total');
+  it(' get by id', async () => {
+    const response = await request(app).get('/clockings/id/marcosw9');
 
     expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('totalHours');
   });
 });

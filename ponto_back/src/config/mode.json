@@ -1,6 +1,6 @@
 {
   "development": {
-    "port": 3000,
+    "port": 5000,
     "database": {
       "username": "root",
       "password": null,
